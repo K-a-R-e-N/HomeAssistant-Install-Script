@@ -22,9 +22,13 @@ sudo chown homeassistant:homeassistant homeassistant
 echo -en "\n"
 echo "# # Создаем виртуальную среду для Home Assistant с выше создной учеткой."
 sudo -u homeassistant -H -s
+echo "Отладка: делаем cd /srv/homeassistant"
 cd /srv/homeassistant
+echo "Отладка: делаем python3 -m venv ."
 python3 -m venv .
+echo "Отладка: делаем source bin/activate"
 source bin/activate
+echo "Отладка: делаем python3 -m pip install wheel"
 python3 -m pip install wheel
 
 echo -en "\n"
