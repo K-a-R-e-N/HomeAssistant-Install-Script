@@ -25,8 +25,8 @@ echo -en '\n'
 echo '   Очищаем хвосты, для возможности последующей нормальной установки:'
 echo '       по пути /srv/homeassistant*'
 sudo rm -rf /srv/homeassistant*
-echo '       по пути /run/sudo/ts/homeassistant*'
-sudo rm -rf  /run/sudo/ts/homeassistant*
+echo '       по пути /run/sudo/ts/homeassistant'
+sudo rm -rf  /run/sudo/ts/homeassistant
 
 echo -en '\n'
 echo '   Очищаем хвосты от плагинов:'
