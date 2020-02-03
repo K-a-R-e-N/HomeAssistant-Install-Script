@@ -36,16 +36,20 @@ echo "# # Ставим сам Home Assistan"
 pip3 install homeassistant
 
 echo -en "\n"
-echo "# # Обязательно запускаем HA"
-hass
+echo "# # Запускаем hass и ждем завершения"
+nohup hass &
+echo "         ждем завершения..."
+until grep "Starting Home Assistant" ./nohup.out
+  do
+  echo "Прошло еще 10 сек"
+  sleep 10
+  done
+echo "# # Убываем процесс hass"
+echo -en "\n"
 
 
 
-
-
-
-
-
+echo "# # Получилось!"
 
 #Установка HASS конфигуратора
 cd /home/homeassistant/.homeassistant
