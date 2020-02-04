@@ -26,7 +26,9 @@ sudo rm -rf /srv/homeassistant/seaech_install.sh
 sleep 2
 sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel ; echo -en '\n' ; echo '# # Устновка Home Assistant...' ; pip3 install homeassistant ; nohup hass &"
 echo -en "\n"
+echo "#############################"
 echo "# # Первый запуск Home Assistant и его настройка..."
+echo "############################################################"
 
 sudo tee -a /srv/homeassistant/seaech_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null 
