@@ -107,17 +107,15 @@ sudo systemctl enable hass-configurator.service
 sudo systemctl start hass-configurator.service
 
 echo -en "\n" ; echo "# # Добавление HASS конфигуратора в меню Home Assistant..."
-
-#Добавим быстрый доступ на левую панель HA ! Второй раз не вводить!
-sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml <<_EOF_
+sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
 
 #HASS-Configurator
 panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:square-edit-outline
-    url: http://192.168.1.33:3218
+    url: http://$(hostname -I | tr -d ' '):3218
 _EOF_
 #Готов
-#sudo nano /home/homeassistant/.homeassistant/configuration.yaml
+_EOF_
 
