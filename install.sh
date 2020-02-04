@@ -116,6 +116,3 @@ panel_iframe:
     icon: mdi:square-edit-outline
     url: http://$(hostname -I | tr -d ' '):3218
 _EOF_
-#Готов
-_EOF_
-
