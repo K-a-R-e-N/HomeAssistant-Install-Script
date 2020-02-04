@@ -33,27 +33,27 @@ until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "      - Настройка конфигурации... нужно еще времени..."
+echo -en "\n" ; echo "        - Настройка конфигурации... нужно еще времени..."
 until grep "Setting up frontend" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "      - Настройка внешнего интерфейса... все еще ждем..."
+echo -en "\n" ; echo "        - Настройка внешнего интерфейса... все еще ждем..."
 until grep "Starting Home Assistant" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "      - Завершение процесса настраивания..."
+echo -en "\n" ; echo "        - Завершение процесса настраивания..."
 _EOF_
 sleep 1
 
-echo -en "\n" ; echo "      - Инициализация программы Home Assistant... подождите..."
+echo -en "\n" ; echo "        - Инициализация программы Home Assistant... подождите..."
 sudo su homeassistant -c "bash /srv/homeassistant/search_install.sh"
 
-echo -en "\n" ; echo "      - Принудительное закрытие Home Assistant..."
+echo -en "\n" ; echo "        - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
 
-echo -en "\n" ; echo "      - Удаление хвостов от предыдущих действий..."
+echo -en "\n" ; echo "        - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/search_install.sh
 
