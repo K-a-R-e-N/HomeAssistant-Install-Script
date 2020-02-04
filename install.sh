@@ -21,4 +21,18 @@ sudo chown homeassistant:homeassistant homeassistant
 
 echo -en "\n"
 echo "# # Создаем виртуальную среду для Home Assistant с выше создной учеткой."
+sudo rm -rf /srv/homeassistant/nohup.out
 sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel ; pip3 install homeassistant ; nohup hass &"
+sudo rm -rf /srv/homeassistant/seaech_install.sh
+sudo tee -a /srv/homeassistant/seaech_install.sh <<_EOF_
+echo "         ждем завершения..."
+until grep "Starting Home Assistant" /srv/homeassistant/nohup.out
+  do
+  echo "Прошло еще 10 сек"
+  sleep 10
+  done
+echo "# # Получилось!"
+_EOF_
+sudo su homeassistant -c "cd /srv/homeassistant ; bash seaech_install.sh"
+echo "следующий пункт готов"
+
