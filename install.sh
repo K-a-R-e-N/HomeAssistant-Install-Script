@@ -27,7 +27,7 @@ sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin
 echo "# # Первый запуск Home Assistant и его настройка..."
 sudo rm -rf /srv/homeassistant/seaech_install.sh
 sudo tee -a /srv/homeassistant/seaech_install.sh <<_EOF_
-echo "         это занимает некоторое времени, ждем завершения..."
+echo "         это займет некоторое время... ждем завершения..."
 until grep "Setting up homeassistant" /srv/homeassistant/nohup.out
   do
   sleep 10
@@ -52,7 +52,7 @@ _EOF_
 sudo su homeassistant -c "cd /srv/homeassistant ; bash seaech_install.sh"
 echo -en "\n"
 echo "# # Убываем процесс hass"
-sudo killall  -w -s 9 -u homeassistant
+echo "# # sudo killall  -w -s 9 -u homeassistant"
 echo -en "\n"
 echo "# # Очищаем хвосты..."
 sudo rm -rf /srv/homeassistant/nohup.out
