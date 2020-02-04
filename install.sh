@@ -109,10 +109,35 @@ sudo systemctl start hass-configurator.service
 echo -en "\n" ; echo "# # Добавление HASS конфигуратора в меню Home Assistant..."
 sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
 
-#HASS-Configurator
+
+# HASS-Configurator #
 panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:square-edit-outline
     url: http://$(hostname -I | tr -d ' '):3218
 _EOF_
+
+echo -en "\n" ;
+echo -en "\n" ;
+echo -en "\n" ;
+echo -en "\n" ;
+echo -en "\n" ;
+echo "╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"
+echo "║                                                                                                                 ║"
+echo "║                                       Установка Home Assistant завершена!                                       ║"
+echo "║                                                                                                                 ║"
+echo "╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
+echo -en "\n" ;
+echo "    ┌──────────────────────────── Полезная информация для работы с Home Assistant ────────────────────────────┐"
+echo "    │                                                                                                         │"
+echo "    │       Доступ к Home Assistant по адресу:   http://$(hostname -I | tr -d ' '):8123                                     │"
+echo "    │   Доступ к HASS конфигуратору по адресу:   http://$(hostname -I | tr -d ' '):8123                                     │"
+echo "    │                                                                                                         │"
+echo "    │               Путь к файлу конфигурации:   sudo nano ~/.homebridge/config.json                          │"
+echo "    │                                                                                                         │"
+echo "    │             Перезагрузка Home Assistant:   sudo systemctl restart homeassistant@homeassistant.service   │"
+echo "    │         Перезагрузка HASS конфигуратора:   sudo systemctl restart hass-configurator.service             │"
+echo "    │                                                                                                         │"
+echo "    └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘"
+echo -en '\n'
