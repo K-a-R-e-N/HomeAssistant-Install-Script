@@ -17,9 +17,7 @@ sudo mkdir homeassistant
 sudo chown homeassistant:homeassistant homeassistant
 
 echo -en "\n" ; echo "# # Создание виртуальной среды для нового аккаунта"
-sudo rm -rf /srv/homeassistant/nohup.out
-sudo rm -rf /srv/homeassistant/seaech_install.sh
-sleep 2
+sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 2
 sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel ; echo -en '\n' ; echo '# # Устновка Home Assistant...' ; pip3 install homeassistant ; nohup hass &"
 echo -en "\n"
 echo "╔════════════════════════════════════════════════════════════╗"
@@ -27,8 +25,8 @@ echo "║                                                            ║"
 echo "║        Первый запуск Home Assistant и его настройка        ║"
 echo "║                                                            ║"
 echo "╚════════════════════════════════════════════════════════════╝"
-
-sudo tee -a /srv/homeassistant/seaech_install.sh > /dev/null <<_EOF_
+sudo rm -rf /srv/homeassistant/search_install.sh
+sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
@@ -48,14 +46,14 @@ _EOF_
 sleep 1
 
 echo "    └── Это займет некоторое время. Ждем завершения... ──┘    " ; echo -en "\n"
-sudo su homeassistant -c "bash /srv/homeassistant/seaech_install.sh"
+sudo su homeassistant -c "bash /srv/homeassistant/search_install.sh"
 
 echo -en "\n" ; echo "      - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
 
 echo -en "\n" ; echo "      - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out
-sudo rm -rf /srv/homeassistant/seaech_install.sh
+sudo rm -rf /srv/homeassistant/search_install.sh
 
 #htop ; echo -en "\n" ; echo "# # Просмотр процессов..."
 
