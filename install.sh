@@ -47,7 +47,8 @@ _EOF_
 sleep 1
 
 echo -en "\n"
-echo "      # # это займет некоторое время... ждем завершения..."
+echo "      ...это займет некоторое время."
+echo "                                      ждем завершения..."
 sudo su homeassistant -c "bash /srv/homeassistant/seaech_install.sh"
 
 echo -en "\n"
