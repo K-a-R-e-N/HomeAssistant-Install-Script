@@ -29,29 +29,31 @@ echo -en "\n"
 echo "# # Первый запуск Home Assistant и его настройка..."
 
 sudo tee -a /srv/homeassistant/seaech_install.sh > /dev/null <<_EOF_
-until grep "Setting up config" /srv/homeassistant/nohup.out
+until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null 
   do
   sleep 10
   done
-echo "         Настройка конфигурации..."
-until grep "Starting Home Assistant" /srv/homeassistant/nohup.out
+echo -en "\n"
+echo "      # # Настройка конфигурации..."
+until grep "Starting Home Assistant" /srv/homeassistant/nohup.out > /dev/null 
   do
   sleep 10
   done
-echo "         Первый запуск Home Assistant и его настройка завершена..."
+echo -en "\n"
+echo "      # # Первый запуск Home Assistant и его настройка завершена..."
 _EOF_
 sleep 1
 
 echo -en "\n"
-echo "         это займет некоторое время... ждем завершения..."
+echo "      # # это займет некоторое время... ждем завершения..."
 sudo su homeassistant -c "bash /srv/homeassistant/seaech_install.sh"
 
 echo -en "\n"
-echo "# # Убывание процесса hass"
+echo "      # # Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
 
 echo -en "\n"
-echo "# # Удаление хвостов..."
+echo "      # # Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/seaech_install.sh
 
