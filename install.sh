@@ -36,7 +36,7 @@ until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
   sleep 10
   done
 echo -en "\n"
-echo "      # # Настройка конфигурации..."
+echo "      # # Идет настройка конфигурации... подождите..."
 until grep "Starting Home Assistant" /srv/homeassistant/nohup.out > /dev/null 
   do
   sleep 10
