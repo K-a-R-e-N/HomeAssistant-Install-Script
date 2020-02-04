@@ -28,21 +28,11 @@ echo "# # Первый запуск Home Assistant и его настройка.
 sudo rm -rf /srv/homeassistant/seaech_install.sh
 sudo tee -a /srv/homeassistant/seaech_install.sh <<_EOF_
 echo "         это займет некоторое время... ждем завершения..."
-until grep "Setting up homeassistant" /srv/homeassistant/nohup.out
+until grep "Setting up config" /srv/homeassistant/nohup.out
   do
   sleep 10
   done
-echo "         Настройка homeassistant..."
-until grep "Setting up lovelace" /srv/homeassistant/nohup.out
-  do
-  sleep 10
-  done
-echo "         настройки lovelace подняты..."
-until grep "Setting up frontend" /srv/homeassistant/nohup.out
-  do
-  sleep 10
-  done
-echo "         Настройка внешнего интерфейса..."
+echo "         Настройка конфигурации..."
 until grep "Starting Home Assistant" /srv/homeassistant/nohup.out
   do
   sleep 10
@@ -57,15 +47,6 @@ echo -en "\n"
 echo "# # Очищаем хвосты..."
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/seaech_install.sh
-
-
-echo -en "\n"
-echo -en "\n"
 echo -en "\n"
 echo "# # тест 1!"
-ls
-echo "# # тест 2!"
-mkdir ./tests
-cd ./tests
-echo "# # тест 3!"
 htop
