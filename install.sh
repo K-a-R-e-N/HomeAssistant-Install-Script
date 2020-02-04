@@ -54,7 +54,7 @@ sudo killall  -w -s 9 -u homeassistant
 
 echo -en "\n"
 echo "      # # Удаление хвостов от предыдущих действий..."
-sudo rm -rf /srv/homeassistant/nohup.out
+echo "ПРОКОММЕНТИРОВАН sudo rm -rf /srv/homeassistant/nohup.out"
 sudo rm -rf /srv/homeassistant/seaech_install.sh
 
 echo -en "\n"
