@@ -118,27 +118,34 @@ panel_iframe:
     url: http://$(hostname -I | tr -d ' '):3218
 _EOF_
 
-echo -en "\n" ;
-echo -en "\n" ;
-echo -en "\n" ;
-echo -en "\n" ;
-echo -en "\n" ;
-echo "╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"
-echo "║                                                                                                                 ║"
-echo "║                                       Установка Home Assistant завершена!                                       ║"
-echo "║                                                                                                                 ║"
-echo "╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
-echo -en "\n" ;
-echo "    ┌──────────────────────────── Полезная информация для работы с Home Assistant ────────────────────────────┐"
-echo "    │                                                                                                         │"
-echo "    │       Доступ к Home Assistant по адресу:   http://$(hostname -I | tr -d ' '):8123                                     │"
-echo "    │   Доступ к HASS конфигуратору по адресу:   http://$(hostname -I | tr -d ' '):8123                                     │"
-echo "    │                                                                                                         │"
-echo "    │               Путь к файлу конфигурации:   sudo nano ~/.homebridge/config.json                          │"
-echo "    │                                                                                                         │"
-echo "    │             Перезагрузка Home Assistant:   sudo systemctl restart homeassistant@homeassistant.service   │"
-echo "    │         Перезагрузка HASS конфигуратора:   sudo systemctl restart hass-configurator.service             │"
-echo "    │                                                                                                         │"
-echo "    └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘"
-echo -en "\n" ;
-echo -en "\n" ;
+echo -en "\n"
+echo -en "\n"
+echo -en "\n"
+echo -en "\n"
+echo -en "\n"
+echo "╔═════════════════════════════════════════════════════════════════════════════╗"
+echo "║                                                                             ║"
+echo "║                     Установка Home Assistant завершена!                     ║"
+echo "║                                                                             ║"
+echo "╚═════════════════════════════════════════════════════════════════════════════╝"
+echo -en "\n"
+echo "    ┌────────── Полезная информация для работы с Home Assistant ──────────┐"
+echo "    │                                                                     │"
+echo "    │                  Доступ к Home Assistant по адресу                  │"
+echo "    │                      http://$(hostname -I | tr -d ' '):8123/                      │"
+echo "    │                                                                     │"
+echo "    │                Доступ к HASS конфигуратору по адресу                │"
+echo "    │                      http://$(hostname -I | tr -d ' '):3218/                      │"
+echo "    │                                                                     │"
+echo "    │                  Редактирование файла конфигурации                  │"
+echo "    │                 sudo nano ~/.homebridge/config.json                 │"
+echo "    │                                                                     │"
+echo "    │                     Перезагрузка Home Assistant                     │"
+echo "    │      sudo systemctl restart homeassistant@homeassistant.service     │"
+echo "    │                                                                     │"
+echo "    │                   Перезагрузка HASS конфигуратора                   │"
+echo "    │           sudo systemctl restart hass-configurator.service          │"
+echo "    │                                                                     │"
+echo "    └─────────────────────────────────────────────────────────────────────┘"
+echo -en "\n"
+echo -en "\n"
