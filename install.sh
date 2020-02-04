@@ -138,4 +138,5 @@ echo "    │             Перезагрузка Home Assistant:   sudo system
 echo "    │         Перезагрузка HASS конфигуратора:   sudo systemctl restart hass-configurator.service             │"
 echo "    │                                                                                                         │"
 echo "    └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘"
-echo -en '\n'
+echo -en "\n" ;
+echo -en "\n" ;
