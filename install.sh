@@ -25,13 +25,15 @@ echo "║                                                            ║"
 echo "║        Первый запуск Home Assistant и его настройка        ║"
 echo "║                                                            ║"
 echo "╚════════════════════════════════════════════════════════════╝"
+echo "    └── Это займет некоторое время. Ждем завершения... ──┘    "
+echo -en "\n"
 sudo rm -rf /srv/homeassistant/search_install.sh
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "      - Настройка конфигурации... подождите..."
+echo -en "\n" ; echo "      - Настройка конфигурации... нужно еще времени..."
 until grep "Setting up frontend" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
@@ -45,7 +47,7 @@ echo -en "\n" ; echo "      - Завершение процесса настра
 _EOF_
 sleep 1
 
-echo "    └── Это займет некоторое время. Ждем завершения... ──┘    " ; echo -en "\n"
+echo -en "\n" ; echo "      - Инициализация программы Home Assistant... подождите..."
 sudo su homeassistant -c "bash /srv/homeassistant/search_install.sh"
 
 echo -en "\n" ; echo "      - Принудительное закрытие Home Assistant..."
