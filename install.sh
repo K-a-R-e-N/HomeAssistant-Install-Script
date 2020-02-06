@@ -11,6 +11,9 @@ echo -en "\n"
 echo -en "\n" ; echo "# # Установка необходимых зависимостей"
 sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y
 
+echo -en "\n" ; echo "# # Установка пакета libavahi-compat-libdnssd-dev..."
+sudo apt-get install -y libavahi-compat-libdnssd-dev
+
 echo -en "\n" ; echo "# # Создание аккаунта под названием homeassistant"
 sudo useradd -rm homeassistant -G dialout,gpio,i2c
 
