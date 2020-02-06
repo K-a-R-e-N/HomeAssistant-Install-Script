@@ -69,7 +69,7 @@ echo -en "\n" ; echo "# # Установка HASS конфигуратора"
 sudo su homeassistant -c "cd /home/homeassistant/.homeassistant ; wget https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py"
 sudo chmod 755 /home/homeassistant/.homeassistant/configurator.py
 
-echo -en "\n" ; echo "# # Создание сервиса для автозапуска Home Assistant"
+echo -en "\n" ; echo "# # Создание службы для автозапуска Home Assistant"
 sudo rm -rf /etc/systemd/system/homeassistant@homeassistant.service
 sudo tee -a /etc/systemd/system/homeassistant@homeassistant.service > /dev/null <<_EOF_
 [Unit]
@@ -85,7 +85,7 @@ ExecStart=/srv/homeassistant/bin/hass -c "/home/homeassistant/.homeassistant"
 WantedBy=multi-user.target
 _EOF_
 
-echo -en "\n" ; echo "# # Создание сервиса для автозапуска HASS Configurator-а"
+echo -en "\n" ; echo "# # Создание службы для автозапуска HASS Configurator-а"
 sudo rm -rf /etc/systemd/system/hass-configurator.service
 sudo tee -a /etc/systemd/system/hass-configurator.service > /dev/null <<_EOF_
 [Unit]
@@ -105,7 +105,7 @@ Restart=always
 WantedBy=multi-user.target
 _EOF_
 
-echo -en "\n" ; echo "# # Активация и включение созданных сервисов автозагрузки"
+echo -en "\n" ; echo "# # Добавление служб в список автозагрузки и их запуск..."
 sudo systemctl --system daemon-reload
 sudo systemctl enable homeassistant@homeassistant.service
 sudo systemctl start homeassistant@homeassistant.service
