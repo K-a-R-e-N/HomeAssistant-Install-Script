@@ -152,3 +152,4 @@ echo "    │           sudo systemctl restart hass-configurator.service        
 echo "    │                                                                     │"
 echo "    └─────────────────────────────────────────────────────────────────────┘"
 echo -en "\n"
+
