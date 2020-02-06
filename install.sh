@@ -39,27 +39,27 @@ until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "       - Настройка конфигурации... нужно еще времени..."
+echo "     - Настройка конфигурации... нужно еще времени..."
 until grep "Setting up frontend" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "       - Настройка внешнего интерфейса... все еще ждем..."
+echo "     - Настройка внешнего интерфейса... все еще ждем..."
 until grep "Starting Home Assistant" /srv/homeassistant/nohup.out > /dev/null
   do
   sleep 10
   done
-echo -en "\n" ; echo "       - Завершение процесса настраивания..."
+echo "     - Завершение процесса настраивания..."
 _EOF_
 sleep 1
 
-echo -en "\n" ; echo "       - Инициализация программы Home Assistant... подождите..."
+echo "     - Инициализация программы Home Assistant... подождите..."
 sudo su homeassistant -c "bash /srv/homeassistant/search_install.sh"
 
-echo -en "\n" ; echo "       - Принудительное закрытие Home Assistant..."
+echo "     - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
 
-echo -en "\n" ; echo "       - Удаление хвостов от предыдущих действий..."
+echo "     - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/search_install.sh
 
@@ -106,11 +106,12 @@ WantedBy=multi-user.target
 _EOF_
 
 echo -en "\n" ; echo "# # Добавление служб в список автозагрузки и их запуск..."
-sudo systemctl --system daemon-reload > /dev/null
-sudo systemctl enable homeassistant@homeassistant.service > /dev/null
-sudo systemctl start homeassistant@homeassistant.service > /dev/null
-sudo systemctl enable hass-configurator.service > /dev/null
-sudo systemctl start hass-configurator.service > /dev/null
+sudo systemctl -q daemon-reload
+# sudo systemctl -q --system daemon-reload
+sudo systemctl -q enable homeassistant@homeassistant.service
+sudo systemctl -q start homeassistant@homeassistant.service
+sudo systemctl -q enable hass-configurator.service
+sudo systemctl -q start hass-configurator.service
 
 echo -en "\n" ; echo "# # Добавление HASS конфигуратора в меню Home Assistant..."
 sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
