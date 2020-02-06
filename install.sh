@@ -106,11 +106,11 @@ WantedBy=multi-user.target
 _EOF_
 
 echo -en "\n" ; echo "# # Добавление служб в список автозагрузки и их запуск..."
-sudo systemctl --system daemon-reload
-sudo systemctl enable homeassistant@homeassistant.service
-sudo systemctl start homeassistant@homeassistant.service
-sudo systemctl enable hass-configurator.service
-sudo systemctl start hass-configurator.service
+sudo systemctl --system daemon-reload > /dev/null
+sudo systemctl enable homeassistant@homeassistant.service > /dev/null
+sudo systemctl start homeassistant@homeassistant.service > /dev/null
+sudo systemctl enable hass-configurator.service > /dev/null
+sudo systemctl start hass-configurator.service > /dev/null
 
 echo -en "\n" ; echo "# # Добавление HASS конфигуратора в меню Home Assistant..."
 sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
