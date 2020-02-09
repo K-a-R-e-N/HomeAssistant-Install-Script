@@ -1,5 +1,7 @@
+  
 #!/bin/bash
 
+function Zagolovok {
 echo -en "\n"
 echo "╔═════════════════════════════════════════════════════════════════════════════╗"
 echo "║                                                                             ║"
@@ -7,9 +9,57 @@ echo "║                 Установка Home Assistant и его завис
 echo "║                                                                             ║"
 echo "╚═════════════════════════════════════════════════════════════════════════════╝"
 echo -en "\n"
+}
+function GoToMenu {
+  while :
+  do
+  echo -e "\a" & echo -en "\n"
+  echo "        ┌─ Выберите действие: ────────────────────────────────────────┐"
+  echo "        │                                                             │"
+  echo "        │       1 - Предварительно очистить систему                   │"
+  echo "        │       2 - Продолжить без очистки системы (Для опытных)      │"
+  echo "        │       3 - Завершить работу скрипта                          │"
+  echo "        │                                                             │"
+  echo "        └─────────────────────────────────────────────────────────────┘"
+  echo "           Чтобы продолжить, введите номер пункта и нажмите на Enter"
+  read a
+  printf "\n"
+  case $a in
+  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && return;;
+  2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && if [ -f ~/.homebridge/config.json ]; then 
+                                                            echo -en "\n"
+                                                            echo "# # Создание резервной копии конфигурационного файла HomeBridge..."
+                                                            #sudo cp -f ~/.homebridge/config.json ~/.config.json.$(date +%s)000
+                                                            fi
+                                                            return;;
+  3)     echo "               - Завершение работы скрипта..." && exit 0;;
+  *)     echo "                           Попробуйте еще раз.";;
+  esac
+  done
+}
+
+Zagolovok
+
+echo -en "\n" ; echo "# # Проверка на ранее установленную версию..."
+if dpkg -l homeassistant &>/dev/null; then
+  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge как системный пакет..."
+  GoToMenu
+elif dpkg -l python3 &>/dev/null; then
+  if pip3 list | grep -q homeassistant; then
+  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge из NPM..."
+  GoToMenu
+  else
+  echo -en "\n" ; echo "    - В системе уже установлен пакет NodeJS $(nodejs -v), но HomeBridge не установлен..."
+  GoToMenu
+  fi
+else
+  echo "    - Ранее установленых пакетов не обнаружено..."
+fi
+
+clear && Zagolovok
 
 echo -en "\n" ; echo "# # Установка необходимых зависимостей"
-sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y
+sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y > /dev/null
 
 echo -en "\n" ; echo "# # Установка пакета libavahi-compat-libdnssd-dev..."
 sudo apt-get install -y libavahi-compat-libdnssd-dev
