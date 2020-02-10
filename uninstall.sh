@@ -31,6 +31,8 @@ sudo systemctl --system daemon-reload > /dev/null
 echo -en "\n" ; echo "  # # Удаление хвостов, для возможности последующей нормальной установки:"
 echo "     - по пути /srv/homeassistant"
 echo "     - по пути /run/sudo/ts/homeassistant"
+sudo rm -rf /srv/homeassistant/nohup.out
+sudo rm -rf /srv/homeassistant/search_install.sh
 sudo rm -rf /srv/homeassistant
 sudo rm -rf  /run/sudo/ts/homeassistant
 
