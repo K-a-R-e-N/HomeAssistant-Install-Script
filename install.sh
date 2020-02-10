@@ -78,7 +78,7 @@ cd /srv
 sudo mkdir homeassistant
 sudo chown homeassistant:homeassistant homeassistant
 echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
-sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 1
+sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /tmp/hass-progress.log ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 1
 
 #exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
@@ -98,17 +98,17 @@ echo -en "\n"
 
 sudo rm -rf /srv/homeassistant/search_install.sh
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
-until grep "Setting up config" /srv/homeassistant/nohup.out > /dev/null
+until grep "Setting up config" /tmp/hass-progress.log > /dev/null
   do
   sleep 10
   done
 echo "     - Настройка конфигурации... нужно еще времени..."
-until grep "Setting up frontend" /srv/homeassistant/nohup.out > /dev/null
+until grep "Setting up frontend" /tmp/hass-progress.log > /dev/null
   do
   sleep 10
   done
 echo "     - Настройка внешнего интерфейса... все еще ждем..."
-until grep "Starting Home Assistant" /srv/homeassistant/nohup.out > /dev/null
+until grep "Starting Home Assistant" /tmp/hass-progress.log > /dev/null
   do
   sleep 10
   done
@@ -123,7 +123,7 @@ echo "     - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
 
 echo "     - Удаление хвостов от предыдущих действий..."
-sudo rm -rf /srv/homeassistant/nohup.out
+sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /tmp/hass-progress.log
 sudo rm -rf /srv/homeassistant/search_install.sh
 
 #htop ; echo -en "\n" ; echo "  # # Просмотр процессов..."
