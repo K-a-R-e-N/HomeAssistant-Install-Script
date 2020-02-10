@@ -141,8 +141,20 @@ sudo rm -rf /srv/homeassistant/search_install.sh
 #htop ; echo -en "\n" ; echo "  # # Просмотр процессов..."
 
 echo -en "\n" ; echo "  # # Установка HASS конфигуратора"
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && cd /home/homeassistant/.homeassistant ; wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && cd /home/homeassistant/.homeassistant && wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py'
 sudo chmod 755 /home/homeassistant/.homeassistant/configurator.py
+
+echo -en "\n" ; echo "  # # Добавление HASS конфигуратора в меню Home Assistant..."
+sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
+
+
+# HASS-Configurator #
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:square-edit-outline
+    url: http://$(hostname -I | tr -d ' '):3218
+_EOF_
 
 echo -en "\n" ; echo "  # # Создание службы для автозапуска Home Assistant"
 sudo rm -rf /etc/systemd/system/homeassistant@homeassistant.service
@@ -194,18 +206,6 @@ sudo systemctl -q enable homeassistant@homeassistant.service
 sudo systemctl -q start homeassistant@homeassistant.service
 sudo systemctl -q enable hass-configurator.service
 sudo systemctl -q start hass-configurator.service
-
-echo -en "\n" ; echo "  # # Добавление HASS конфигуратора в меню Home Assistant..."
-sudo grep "#HASS-Configurator" /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 || sudo tee -a /home/homeassistant/.homeassistant/configuration.yaml > /dev/null 2>&1 <<_EOF_
-
-
-# HASS-Configurator #
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:square-edit-outline
-    url: http://$(hostname -I | tr -d ' '):3218
-_EOF_
 
 echo -en "\n"
 echo -en "\n"
