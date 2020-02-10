@@ -48,15 +48,15 @@ if dpkg -l homeassistant &>/dev/null; then
   echo -en "\n" ; echo "    - В вашей системе уже установлен Home Assistant как системный пакет..."
   GoToMenu
 elif dpkg -l python3 &>/dev/null; then
-  if (cd /srv/homeassistant && source bin/activate && pip freeze | grep -q homeassistant); then
-  echo -en "\n" ; echo "    - В вашей системе уже установлен Home Assistant из PIP3..."
-  GoToMenu
+  if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source bin/activate && pip freeze | grep -q homeassistant); then
+    echo "В вашей системе уже установлен Home Assistant из PIP3..."
   else
-  echo "    - Ранее установленых пакетов не обнаружено, кроме Python3..."
+    echo "Ранее установленых пакетов не обнаружено, кроме Python3..."
   fi
 else
   echo "    - Ранее установленых пакетов не обнаружено..."
 fi
+
 
 echo -en "\n" ; echo "# # Обновление списка пакетов..."
 sudo apt-get update > /dev/null
