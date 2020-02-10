@@ -23,12 +23,12 @@ function GoToMenu {
   echo "        │                                                             │"
   echo "        └─────────────────────────────────────────────────────────────┘"
   echo "           Чтобы продолжить, введите номер пункта и нажмите на Enter"
-  read a
   echo -e "\a"
+  read a
   printf "\n"
   case $a in
-  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && return;;
-  2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear
+  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && Zagolovok && bash uninstall.sh && return;;
+  2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && Zagolovok
                                             if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
                                             echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
                                             sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
