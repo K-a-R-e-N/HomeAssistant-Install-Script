@@ -9,6 +9,12 @@ echo -en "\n"
 echo -en "\n" ; echo "  # # Завершение процесса Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant > /dev/null 2>&1
 
+if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
+sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
+echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
+sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/config.json.$(date +%s)000
+fi
+
 echo -en "\n" ; echo "  # # Деинсталляция Home Assistant..."
 sudo pip3 uninstall homeassistant > /dev/null 2>&1
 
