@@ -82,7 +82,7 @@ sudo chown homeassistant:homeassistant homeassistant
 
 echo -en "\n" ; echo "# # Создание виртуальной среды для нового аккаунта"
 sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 2
-sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel > /dev/null; echo -en '\n' ; echo '# # Устновка Home Assistant...' ; pip3 install homeassistant > /dev/null ; nohup hass &"
+sudo su homeassistant -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel > /dev/null; echo -en '\n' ; echo '# # Устновка Home Assistant...' ; pip3 install homeassistant > /dev/null ; nohup hass & > /dev/null"
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
 echo "║                                                                  ║"
@@ -124,7 +124,7 @@ sudo rm -rf /srv/homeassistant/search_install.sh
 #htop ; echo -en "\n" ; echo "# # Просмотр процессов..."
 
 echo -en "\n" ; echo "# # Установка HASS конфигуратора"
-sudo su homeassistant -c "cd /home/homeassistant/.homeassistant ; wget https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py"
+sudo su homeassistant -c "cd /home/homeassistant/.homeassistant ; wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py"
 sudo chmod 755 /home/homeassistant/.homeassistant/configurator.py
 
 echo -en "\n" ; echo "# # Создание службы для автозапуска Home Assistant"
