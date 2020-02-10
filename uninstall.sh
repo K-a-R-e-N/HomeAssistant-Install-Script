@@ -16,6 +16,7 @@ sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/con
 fi
 
 echo -en "\n" ; echo "  # # Деинсталляция Home Assistant..."
+sudo pip uninstall homeassistant > /dev/null 2>&1
 sudo pip3 uninstall homeassistant > /dev/null 2>&1
 
 echo -en "\n" ; echo "  # # Удаление пользователя homeassistant..."
