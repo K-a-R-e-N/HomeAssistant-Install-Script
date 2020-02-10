@@ -28,9 +28,9 @@ function GoToMenu {
   1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && return;;
   2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear
                                             if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
-                                            sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
                                             echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
-                                            sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/config.json.$(date +%s)000
+                                            sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
+                                            sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
                                             fi
   3)     echo "               - Завершение работы скрипта..." && exit 0;;
   *)     echo "                           Попробуйте еще раз.";;
@@ -61,11 +61,15 @@ clear && Zagolovok
 echo -en "\n" ; echo "# # Установка необходимых зависимостей"
 sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y > /dev/null
 
+#echo -en "\n" ; echo "# # Установка пакетов XXXXXXXXXXXXXXXXXXXX python..."
+
 echo -en "\n" ; echo "# # Установка пакета libavahi-compat-libdnssd-dev..."
-sudo apt-get install -y libavahi-compat-libdnssd-dev
+sudo apt-get install -y libavahi-compat-libdnssd-dev > /dev/null
+
+#echo -en "\n" ; echo "# # Устранение ранее известных проблем..."
 
 echo -en "\n" ; echo "# # Создание аккаунта под названием homeassistant"
-sudo useradd -rm homeassistant -G dialout,gpio,i2c
+sudo useradd -rm homeassistant -G dialout,gpio,i2c > /dev/null
 
 echo -en "\n" ; echo "# # Создание каталога homeassistant с передачей прав новому аккаунту"
 cd /srv
@@ -154,6 +158,13 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 _EOF_
+
+if [ -d ~/HA_BackUp/ ]; then 
+echo -en "\n" ; echo "# # Восстанавление резервной копии конфигурационного файла Home Assistant..."
+sudo mkdir -p /home/homeassistant/.homeassistant/HA_BackUp && sudo chmod 777 /home/homeassistant/.homeassistant/HA_BackUp
+sudo mv -f ~/HA_BackUp/configuration.yaml.* /home/homeassistant/.homeassistant/HA_BackUp
+sudo rm -rf ~/HA_BackUp
+fi
 
 echo -en "\n" ; echo "# # Добавление служб в список автозагрузки и их запуск..."
 sudo systemctl -q daemon-reload
