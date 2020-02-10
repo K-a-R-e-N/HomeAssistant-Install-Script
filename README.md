@@ -29,6 +29,7 @@ sudo apt-get update && sudo apt-get upgrade -y && sudo apt install git -y
 git clone https://github.com/K-a-R-e-N/HomeAssistant-Install-Script
 cd HomeAssistant-Install-Script
 bash install.sh && bash stripping.sh && cd ..
+#Готово
 ```
 Третья строка: `bash install.sh && bash stripping.sh && cd ..` настраиваемая...  
 Можно как добавлять так и удалять параметры...  
@@ -38,6 +39,7 @@ bash install.sh && bash stripping.sh && cd ..
 git clone https://github.com/K-a-R-e-N/HomeAssistant-Install-Script
 cd HomeAssistant-Install-Script
 bash uninstall.sh && bash install.sh && bash stripping.sh && cd ..
+#Готово
 ```
 итак...
 
