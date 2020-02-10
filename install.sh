@@ -27,7 +27,7 @@ function GoToMenu {
   read a
   printf "\n"
   case $a in
-  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && Zagolovok && bash uninstall.sh && return;;
+  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && Zagolovok && return;;
   2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && Zagolovok
                                             if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
                                             echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
