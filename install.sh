@@ -108,7 +108,7 @@ until grep "Setting up frontend" /srv/homeassistant/hass-progress.log > /dev/nul
   sleep 10
   done
 echo "     - Настройка внешнего интерфейса... все еще ждем..."
-until grep "Starting Home Assistant" /srv/homeassistant//srv/homeassistant/hass-progress.log > /dev/null
+until grep "Starting Home Assistant" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
   done
@@ -117,7 +117,7 @@ _EOF_
 sleep 1
 
 echo "     - Инициализация программы Home Assistant... подождите..."
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && bash /srv/homeassistant/search_install.sh'
+sudo -u homeassistant -H -s bash -c 'bash /srv/homeassistant/search_install.sh'
 
 echo "     - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
