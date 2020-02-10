@@ -83,7 +83,7 @@ sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/hass-p
 #exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
 #Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip3 -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip3 -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #Выполненяем тестово в несколько через Bash вариант
