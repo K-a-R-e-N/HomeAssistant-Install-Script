@@ -49,7 +49,8 @@ if dpkg -l homeassistant &>/dev/null; then
   GoToMenu
 elif dpkg -l python3 &>/dev/null; then
   if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
-    echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant из PIP3..."
+    echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant через PIP..."
+    GoToMenu
   else
     echo "     - Ранее установленых пакетов не обнаружено, кроме Python3..."
   fi
@@ -87,8 +88,12 @@ sleep 1
 
 #Выполнение через Bash вариант
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install homeassistant'
-cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant
-cd
+if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
+  echo "     - Home Assistant успешно установлен через PIP..."
+else
+  echo -en "\n" ; echo "     - Не удалось установить Home Assistant через PIP!!!"
+    GoToMenu
+fi
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
