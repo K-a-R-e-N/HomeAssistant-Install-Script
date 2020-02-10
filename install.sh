@@ -94,9 +94,11 @@ else
   echo -en "\n" ; echo "     - Не удалось установить Home Assistant через PIP!!!"
     GoToMenu
 fi
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+#sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+
 #Выполненяем тестово в несколько через Bash вариант
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
