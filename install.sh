@@ -32,6 +32,7 @@ function GoToMenu {
                                             sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
                                             sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
                                             fi
+                                            return;;
   3)     echo "               - Завершение работы скрипта..." && exit 0;;
   *)     echo "                           Попробуйте еще раз.";;
   esac
