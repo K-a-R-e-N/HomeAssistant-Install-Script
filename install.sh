@@ -78,9 +78,12 @@ cd /srv
 sudo mkdir homeassistant
 sudo chown homeassistant:homeassistant homeassistant
 echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
-sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/hass-progress.log ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 1
+sudo rm -rf /srv/homeassistant/nohup.out
+sudo rm -rf /srv/homeassistant/hass-progress.log
+sudo rm -rf /srv/homeassistant/search_install.sh
+sleep 1
 
-#exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
+exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
 #Выполнение через Bash вариант
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip3 -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip3 -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
