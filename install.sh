@@ -87,7 +87,7 @@ sleep 1
 #exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
 #Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install homeassistant'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --default-timeout=100 homeassistant'
 if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
   echo "     - Home Assistant успешно установлен через PIP..."
 else
