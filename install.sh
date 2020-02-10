@@ -26,12 +26,12 @@ function GoToMenu {
   printf "\n"
   case $a in
   1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && return;;
-  2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && if [ -f ~/.homebridge/config.json ]; then 
-                                                            echo -en "\n"
-                                                            echo "# # Создание резервной копии конфигурационного файла HomeBridge..."
-                                                            #sudo cp -f ~/.homebridge/config.json ~/.config.json.$(date +%s)000
-                                                            fi
-                                                            return;;
+  2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear
+                                            if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
+                                            sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
+                                            echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
+                                            sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/config.json.$(date +%s)000
+                                            fi
   3)     echo "               - Завершение работы скрипта..." && exit 0;;
   *)     echo "                           Попробуйте еще раз.";;
   esac
@@ -40,21 +40,21 @@ function GoToMenu {
 
 Zagolovok
 
-echo -en "\n" ; echo "# # Проверка на ранее установленную версию..."
-if dpkg -l homeassistant &>/dev/null; then
-  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge как системный пакет..."
-  GoToMenu
-elif dpkg -l python3 &>/dev/null; then
-  if pip3 list | grep -q homeassistant; then
-  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge из NPM..."
-  GoToMenu
-  else
-  echo -en "\n" ; echo "    - В системе уже установлен пакет NodeJS $(nodejs -v), но HomeBridge не установлен..."
-  GoToMenu
-  fi
-else
-  echo "    - Ранее установленых пакетов не обнаружено..."
-fi
+#echo -en "\n" ; echo "# # Проверка на ранее установленную версию..."
+#if dpkg -l homeassistant &>/dev/null; then
+#  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge как системный пакет..."
+#  GoToMenu
+#elif dpkg -l python3 &>/dev/null; then
+#  if pip3 list | grep -q homeassistant; then
+#  echo -en "\n" ; echo "    - В вашей системе уже установлен HomeBridge из NPM..."
+#  GoToMenu
+#  else
+#  echo -en "\n" ; echo "    - В системе уже установлен пакет NodeJS $(nodejs -v), но HomeBridge не установлен..."
+#  GoToMenu
+#  fi
+#else
+#  echo "    - Ранее установленых пакетов не обнаружено..."
+#fi
 
 clear && Zagolovok
 
