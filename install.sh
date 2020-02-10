@@ -77,10 +77,16 @@ echo -en "\n" ; echo "  # # Создание каталога homeassistant с �
 cd /srv
 sudo mkdir homeassistant
 sudo chown homeassistant:homeassistant homeassistant
-exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 83 строка!! ошибка sh: 1: source: not found
 echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
 sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 1
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip install wheel > /dev/null && printf "\n  # # Установка Home Assistant...\n" && pip3 install homeassistant > /dev/null && printf "\n  # # Запуск логирования......\n" && nohup hass &'
+
+exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
+
+#Bash запуск
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &'
+
+
+#sh запуск
 
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
