@@ -29,12 +29,13 @@ sudo rm -rf /etc/systemd/system/multi-user.target.wants/homeassistant*
 sudo systemctl --system daemon-reload > /dev/null
 
 echo -en "\n" ; echo "  # # Удаление хвостов, для возможности последующей нормальной установки:"
+echo "     - по пути /home/homeassistant"
 echo "     - по пути /srv/homeassistant"
 echo "     - по пути /run/sudo/ts/homeassistant"
-sudo rm -rf /srv/homeassistant/nohup.out
-sudo rm -rf /srv/homeassistant/search_install.sh
+sudo rm -rf /home/homeassistant
 sudo rm -rf /srv/homeassistant
 sudo rm -rf  /run/sudo/ts/homeassistant
+
 
 echo -en "\n" ; echo "  # # Удаление хвостов от плагинов:"
 
