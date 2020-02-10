@@ -94,19 +94,18 @@ else
   echo -en "\n" ; echo "     - Не удалось установить Home Assistant через PIP!!!"
     GoToMenu
 fi
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 
-#Выполненяем тестово в несколько через Bash вариант
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
 echo "║                                                                  ║"
 echo "║           Первый запуск Home Assistant и его настройка           ║"
 echo "║                                                                  ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
-echo "      └─── Это займет некоторое время. Ждем завершения... ───┘      "
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass &>/srv/homeassistant/hass-progress.log &'
+echo "      └─── Это займет некоторое время. Ждем завершения... ───┘"
 echo -en "\n"
 
 sudo rm -rf /srv/homeassistantsearch_install.sh
@@ -130,7 +129,7 @@ _EOF_
 sleep 1
 
 echo "     - Инициализация программы Home Assistant... подождите..."
-sudo -u homeassistant -H -s bash -c 'bash /srv/homeassistant/search_install.sh'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && bash /srv/homeassistant/search_install.sh'
 
 echo "     - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
