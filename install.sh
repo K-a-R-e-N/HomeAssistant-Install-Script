@@ -1,5 +1,6 @@
 #!/bin/bash
 #set -x
+clear
 
 function Zagolovok {
 echo -en "\n"
