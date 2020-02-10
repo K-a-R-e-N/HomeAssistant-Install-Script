@@ -59,6 +59,9 @@ Zagolovok
 
 clear && Zagolovok
 
+echo -en "\n" ; echo "# # Обновление списка пакетов..."
+sudo apt-get update > /dev/null
+
 echo -en "\n" ; echo "# # Установка необходимых зависимостей"
 sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y > /dev/null
 
