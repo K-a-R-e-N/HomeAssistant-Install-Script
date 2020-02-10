@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 
 function Zagolovok {
 echo -en "\n"
@@ -80,7 +80,7 @@ sudo chown homeassistant:homeassistant homeassistant
 
 echo -en "\n" ; echo "# # Создание виртуальной среды для нового аккаунта"
 sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/search_install.sh ; sleep 2
-sudo -u homeassistant -i sh -c "cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel > /dev/null; echo -en '\n' ; echo '# # Устновка Home Assistant...' ; pip3 install homeassistant > /dev/null ; nohup hass & > /dev/null"
+sudo -u homeassistant -i sh -c 'cd /srv/homeassistant ; python3 -m venv . ; source bin/activate ; python3 -m pip install wheel > /dev/null; echo -en "\n" ; echo "# # Устновка Home Assistant..." ; pip3 install homeassistant > /dev/null ; nohup hass & > /dev/null'
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
 echo "║                                                                  ║"
@@ -110,7 +110,7 @@ _EOF_
 sleep 1
 
 echo "     - Инициализация программы Home Assistant... подождите..."
-sudo -u homeassistant -i sh -c "bash /srv/homeassistant/search_install.sh"
+sudo -u homeassistant -i sh -c 'bash /srv/homeassistant/search_install.sh'
 
 echo "     - Принудительное закрытие Home Assistant..."
 sudo killall  -w -s 9 -u homeassistant
@@ -122,7 +122,7 @@ sudo rm -rf /srv/homeassistant/search_install.sh
 #htop ; echo -en "\n" ; echo "# # Просмотр процессов..."
 
 echo -en "\n" ; echo "# # Установка HASS конфигуратора"
-sudo -u homeassistant -i sh -c "cd /home/homeassistant/.homeassistant ; wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py"
+sudo -u homeassistant -i sh -c 'cd /home/homeassistant/.homeassistant ; wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py'
 sudo chmod 755 /home/homeassistant/.homeassistant/configurator.py
 
 echo -en "\n" ; echo "# # Создание службы для автозапуска Home Assistant"
