@@ -22,9 +22,9 @@ function GoToMenu {
   echo "        └─────────────────────────────────────────────────────────────┘"
   echo "           Чтобы продолжить, введите номер пункта и нажмите на Enter"
   read a
+  echo -e "\a"
   printf "\n"
   case $a in
-  echo -e "\a"
   1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && return;;
   2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear
                                             if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
