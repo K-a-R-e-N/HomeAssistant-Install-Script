@@ -47,4 +47,18 @@ bash uninstall.sh && bash install.sh && bash stripping.sh && cd ..
 `bash install.sh &&` - Чистая установка Home Assistant и его зависимостей  
 `bash stripping.sh &&` - Удаляет временную папку с содержимым, где хранился загружаемый скрипт  
 
+### ПОСЛЕДУЮЩЕЕ ОБНОВЛЕНИЕ
+Для обновления до последней версии Home Assistant выполните следующие простые шаги:
+```
+sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade homeassistant
+sudo systemctl restart homeassistant@homeassistant.service 
+#Готово
+```
+#### _Помните, что запуск некоторых обновлений может занять больше времени, чем другие.
+#### _Если Home Assistant не запускается, не забудьте проверить критические изменения в заметках о выпуске https://github.com/home-assistant/home-assistant/releases
+
+
+
 Вот и все!
