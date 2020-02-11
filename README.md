@@ -57,11 +57,8 @@ sudo systemctl restart homeassistant@homeassistant.service
 #Готово
 ```
 #### _ Помните, что запуск некоторых обновлений может занять больше времени, чем другие.
-#### _ Если Home Assistant не запускается, не забудьте проверить критические изменения в `заметках о выпуске <https://github.com/home-assistant/home-assistant/releases>`__.
+#### _ Если Home Assistant не запускается, не забудьте проверить критические изменения в [заметках о выпуске](https://github.com/home-assistant/home-assistant/releases) 
 
 
-Check out `home-assistant.io <https://home-assistant.io>`__ for `a
-demo <https://home-assistant.io/demo/>`__, `installation instructions <https://home-assistant.io/getting-started/>`__,
-`tutorials <https://home-assistant.io/getting-started/automation-2/>`__ and `documentation <https://home-assistant.io/docs/>`__.
 
 На этом у меня все!
