@@ -56,9 +56,8 @@ pip3 install --upgrade homeassistant
 sudo systemctl restart homeassistant@homeassistant.service 
 #Готово
 ```
-#### _Помните, что запуск некоторых обновлений может занять больше времени, чем другие.
-#### _Если Home Assistant не запускается, не забудьте проверить критические изменения в заметках о выпуске https://github.com/home-assistant/home-assistant/releases
+#### _ Помните, что запуск некоторых обновлений может занять больше времени, чем другие.
+#### _ Если Home Assistant не запускается, не забудьте проверить критические изменения в `заметках о выпуске <https://github.com/home-assistant/home-assistant/releases>`__, 
 
 
-
-Вот и все!
+На этом у меня все!
