@@ -114,7 +114,7 @@ until grep "Setting up config" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
   done
-echo "     - Настройка конфигурации... нужно еще времени..."
+echo "     - Настройка конфигурации... нужно больше времени..."
 until grep "Setting up frontend" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
