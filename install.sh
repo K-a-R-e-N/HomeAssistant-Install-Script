@@ -66,21 +66,24 @@ sudo apt-get update > /dev/null
 echo -en "\n" ; echo "  # # Установка необходимых зависимостей..."
 #sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev autoconf build-essential -y > /dev/null
 
-echo "     - Python 3..."
+        echo "     - python3..."
 sudo apt-get install python3 -y > /dev/null
-echo "     - Python3-DEV, Python3-VENV, Python3-PIP..."
-sudo apt-get install python3-dev python3-venv python3-pip -y > /dev/null
-echo "     - libffi-dev, libssl-dev..."
-sudo apt-get install libffi-dev libssl-dev -y > /dev/null
-echo "     - autoconf..."
+        echo "     - python3-dev..."
+sudo apt-get install python3-dev -y > /dev/null
+        echo "     - python3-venv..."
+sudo apt-get install python3-venv -y > /dev/null
+        echo "     - python3-pip..."
+sudo apt-get install python3-pip -y > /dev/null
+        echo "     - libffi-dev..."
+sudo apt-get install libffi-dev -y > /dev/null
+        echo "     - libssl-dev..."
+sudo apt-get install libssl-dev -y > /dev/null
+        echo "     - autoconf..."
 sudo apt-get install autoconf -y > /dev/null
-echo "     - build-essential (gcc, g++, make)..."
+        echo "     - build-essential (gcc, g++, make)..."
 sudo apt-get install build-essential -y > /dev/null
-
-#echo -en "\n" ; echo "  # # Установка пакетов XXXXXXXXXXXXXXXXXXXX python..."
-
-echo -en "\n" ; echo "  # # Установка пакета libavahi-compat-libdnssd-dev..."
-sudo apt-get install -y libavahi-compat-libdnssd-dev > /dev/null
+        echo "     - libavahi-compat-libdnssd-dev..."
+sudo apt-get install libavahi-compat-libdnssd-dev -y > /dev/null
 
 #echo -en "\n" ; echo "  # # Устранение ранее известных проблем..."
 
