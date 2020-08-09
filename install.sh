@@ -95,6 +95,7 @@ cd /srv
 sudo mkdir homeassistant
 sudo chown homeassistant:homeassistant homeassistant
 echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
+        echo "     - Предварительная очистка..."
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/hass-progress.log
 sudo rm -rf /srv/homeassistant/search_install.sh
@@ -103,7 +104,7 @@ sleep 1
 #exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
 #Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --default-timeout=100 homeassistant'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "\n     - Установка venv...\n" && python3 -m venv . && printf "\n     - source bin/activate...\n" && source bin/activate && printf "\n     - Установка pip...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --default-timeout=100 homeassistant'
 if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
   echo "     - Home Assistant успешно установлен через PIP..."
 else
