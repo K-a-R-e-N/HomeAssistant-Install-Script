@@ -27,7 +27,7 @@ function GoToMenu {
   read a
   printf "\n"
   case $a in
-  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && Zagolovok && return;;
+  1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && sleep 3 && clear && Zagolovok && return;;
   2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && Zagolovok
                                             echo -en "\n" ; echo "  # # Остановка и завершение процесса Home Assistant..."
                                             sudo killall -w -s 9 -u homeassistant > /dev/null 2>&1
@@ -87,7 +87,8 @@ sudo apt-get install build-essential -y > /dev/null
         echo "     - libavahi-compat-libdnssd-dev..."
 sudo apt-get install libavahi-compat-libdnssd-dev -y > /dev/null
 
-#echo -en "\n" ; echo "  # # Устранение ранее известных проблем..."
+echo -en "\n" ; echo "  # # Устранение ранее известных проблем..."
+sudo python3 -m pip -q install --no-cache-dir flask
 
 echo -en "\n" ; echo "  # # Создание аккаунта под названием homeassistant..."
 sudo useradd -rm homeassistant -G dialout,gpio,i2c > /dev/null
