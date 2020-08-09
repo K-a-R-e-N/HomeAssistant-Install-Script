@@ -71,7 +71,7 @@ sudo apt-get install python3 -y > /dev/null
 echo "     - Python3-DEV, Python3-VENV, Python3-PIP..."
 sudo apt-get install python3-dev python3-venv python3-pip -y > /dev/null
 echo "     - libffi-dev, libssl-dev..."
-sudo apt-get libffi-dev libssl-dev -y > /dev/null
+sudo apt-get install libffi-dev libssl-dev -y > /dev/null
 echo "     - autoconf..."
 sudo apt-get install autoconf -y > /dev/null
 echo "     - build-essential (gcc, g++, make)..."
