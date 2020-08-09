@@ -1,6 +1,14 @@
   
 #!/bin/bash
 #set -x
+
+echo "     - Принудительное закрытие Home Assistant..."
+sudo killall  -w -s 9 -u homeassistant
+
+echo "     - Удаление хвостов от предыдущих действий..."
+sudo rm -rf /srv/homeassistant/nohup.out
+sudo rm -rf /srv/homeassistant/hass-progress.log
+sudo rm -rf /srv/homeassistant/search_install.sh
 clear
 
 
