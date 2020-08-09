@@ -7,9 +7,9 @@ echo "╚═══════════════════════�
 echo -en "\n"
 
 echo -en "\n" ; echo "  # # Завершение процесса Home Assistant..."
-sudo killall  -w -s 9 -u homeassistant > /dev/null 2>&1
+sudo killall -w -s 9 -u homeassistant > /dev/null 2>&1
 
-if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
+if [ -f ~/home/homeassistant/.homeassistant/configuration.yaml ]; then
 echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
 sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
 sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
