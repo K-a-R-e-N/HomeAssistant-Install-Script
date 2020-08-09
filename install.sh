@@ -29,7 +29,9 @@ function GoToMenu {
   case $a in
   1)     echo "                     - Предварительная очистка системы..." && sleep 2 && clear && bash uninstall.sh && Zagolovok && return;;
   2)     echo "                  - Выполнение скрипта без очистки системы..." && sleep 2 && clear && Zagolovok
-                                            if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
+                                            echo -en "\n" ; echo "  # # Остановка и завершение процесса Home Assistant..."
+                                            sudo killall -w -s 9 -u homeassistant > /dev/null 2>&1
+                                            if [ -f ~/home/homeassistant/.homeassistant/configuration.yaml ]; then
                                             echo -en "\n" ; echo "  # # Создание резервной копии конфигурационного файла Home Assistant..."
                                             sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
                                             sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
@@ -62,7 +64,7 @@ echo -en "\n" ; echo "  # # Обновление списка пакетов..."
 sudo apt-get update > /dev/null
 
 echo -en "\n" ; echo "  # # Установка необходимых зависимостей..."
-sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev -y > /dev/null
+sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev autoconf build-essential -y > /dev/null
 
 #echo -en "\n" ; echo "  # # Установка пакетов XXXXXXXXXXXXXXXXXXXX python..."
 
