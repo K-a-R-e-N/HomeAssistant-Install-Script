@@ -88,7 +88,7 @@ sudo apt-get install build-essential -y > /dev/null
 sudo apt-get install libavahi-compat-libdnssd-dev -y > /dev/null
 
 echo -en "\n" ; echo "  # # Устранение ранее известных проблем..."
-sudo python3 -m pip -q install --no-cache-dir flask
+#sudo python3 -m pip -q install --no-cache-dir flask
 
 echo -en "\n" ; echo "  # # Создание аккаунта под названием homeassistant..."
 sudo useradd -rm homeassistant -G dialout,gpio,i2c > /dev/null
@@ -107,7 +107,7 @@ sleep 1
 #exit #Принудительное завершение скрипта!!! Код дальше не работает, а имено 86 строка!!
 
 #Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "     - Создание окружения...\n" && python3 -m venv . && printf "     - Активация окружения...\n" && source bin/activate && printf "     - Установка всех зависимостей...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --default-timeout=100 homeassistant'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "     - Создание окружения...\n" && python3 -m venv . && printf "     - Активация окружения...\n" && source bin/activate && printf "     - Установка всех зависимостей...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant'
 if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
   echo "     - Home Assistant успешно установлен через PIP..."
 else
