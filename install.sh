@@ -48,14 +48,15 @@ Zagolovok
 echo -en "\n" ; echo "  # # Проверка на ранее установленную версию..."
 if dpkg -l homeassistant &>/dev/null; then
   echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant как системный пакет..."
+  sleep 3
   GoToMenu
-elif dpkg -l python3 &>/dev/null; then
-  if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
-    echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant через PIP..."
-    GoToMenu
-  fi
+elif dpkg -l python3 &>/dev/null && [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
+  echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant через PIP..."
+  sleep 3
+  GoToMenu
 elif [ -d /srv/homeassistant ] &>/dev/null; then
   echo -en "\n" ; echo "     - В вашей системе обнаружена папка homeassistant..."
+  sleep 3
   GoToMenu
 else
   echo "     - Ранее установленых пакетов не обнаружено..."
