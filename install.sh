@@ -126,11 +126,11 @@ echo "║                                                                  ║"
 echo "║           Первый запуск Home Assistant и его настройка           ║"
 echo "║                                                                  ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass &>/srv/homeassistant/hass-progress.log &'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass -v &>/srv/homeassistant/hass-progress.log &'
 echo "      └─── Это займет некоторое время. Ждем завершения... ───┘"
 echo -en "\n"
 
-sudo rm -rf /srv/homeassistantsearch_install.sh
+sudo rm -rf /srv/homeassistant/search_install.sh
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/hass-progress.log > /dev/null
   do
