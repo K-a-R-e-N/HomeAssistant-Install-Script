@@ -53,9 +53,10 @@ elif dpkg -l python3 &>/dev/null; then
   if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
     echo -en "\n" ; echo "     - В вашей системе уже установлен Home Assistant через PIP..."
     GoToMenu
-  else
-    echo "     - Ранее установленых пакетов не обнаружено, кроме Python3..."
   fi
+elif [ -d /srv/homeassistant ] &>/dev/null; then
+  echo -en "\n" ; echo "     - В вашей системе обнаружена папка homeassistant..."
+  GoToMenu
 else
   echo "     - Ранее установленых пакетов не обнаружено..."
 fi
