@@ -120,8 +120,6 @@ fi
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 
-function Zapusk {echo -en "\n"" ;echo "     - тетсируем что дальше будет"}
-
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
 echo "║                                                                  ║"
