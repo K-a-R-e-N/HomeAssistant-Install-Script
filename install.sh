@@ -17,9 +17,10 @@ function GoToMenu {
   echo -en "\n"
   echo "        ┌─ Выберите действие: ────────────────────────────────────────┐"
   echo "        │                                                             │"
-  echo "        │       1 - Предварительно очистить систему                   │"
-  echo "        │       2 - Продолжить без очистки системы (Для опытных)      │"
-  echo "        │       3 - Завершить работу скрипта                          │"
+  echo "        │   1 - Предварительно очистить систему                       │"
+  echo "        │   2 - Продолжить без очистки системы (Для опытных)          │"
+  echo "        │   3 - Перейти к первому запуску Home Assistan (Для опытных) │"
+  echo "        │   4 - Завершить работу скрипта                              │"
   echo "        │                                                             │"
   echo "        └─────────────────────────────────────────────────────────────┘"
   echo "           Чтобы продолжить, введите номер пункта и нажмите на Enter"
@@ -37,7 +38,8 @@ function GoToMenu {
                                             sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
                                             fi
                                             return;;
-  3)     echo "               - Завершение работы скрипта..." && exit 0;;
+  3)     echo "                     - Перейти к первому запуску Home Assistan (Для опытных)..." && sleep 2 && clear && Zagolovok && return;;
+  4)     echo "               - Завершение работы скрипта..." && exit 0;;
   *)     echo "                           Попробуйте еще раз.";;
   esac
   done
@@ -117,6 +119,8 @@ fi
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+
+function Zapusk {echo -en "\n"}
 
 echo -en "\n" ; echo -en "\n"
 echo "╔══════════════════════════════════════════════════════════════════╗"
