@@ -19,7 +19,7 @@ sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . 
 echo "      └─── Это займет некоторое время. Ждем завершения... ───┘"
 echo -en "\n"
 
-sudo rm -rf /srv/homeassistantsearch_install.sh
+sudo rm -rf /srv/homeassistant/search_install.sh
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/hass-progress.log > /dev/null
   do
