@@ -129,6 +129,8 @@ echo "╚═══════════════════════�
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass -v &>/srv/homeassistant/hass-progress.log &'
 echo "      └─── Это займет некоторое время. Ждем завершения... ───┘"
 echo -en "\n"
+echo "                                 Примерное время ожидания ~ 10 мин┘"
+echo -en "\n"
 
 sudo rm -rf /srv/homeassistant/search_install.sh
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
@@ -154,7 +156,8 @@ echo "     - Инициализация программы Home Assistant... п�
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && bash /srv/homeassistant/search_install.sh'
 
 echo "     - Принудительное закрытие Home Assistant..."
-sudo killall  -w -s 9 -u homeassistant
+#sudo killall -w -s 9 -u homeassistant
+sudo killall -s 9 -u homeassistant
 
 echo "     - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/hass-progress.log
