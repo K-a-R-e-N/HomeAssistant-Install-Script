@@ -3,7 +3,7 @@
 #set -x
 
 echo "     - Принудительное закрытие Home Assistant..."
-sudo killall  -w -s 9 -u homeassistant
+sudo killall -w -s 9 -u homeassistant
 
 echo "     - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out
@@ -51,7 +51,7 @@ echo "     - Инициализация программы Home Assistant... п�
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && bash /srv/homeassistant/search_install.sh'
 
 echo "     - Принудительное закрытие Home Assistant..."
-sudo killall  -w -s 9 -u homeassistant
+sudo killall -w -s 9 -u homeassistant
 
 echo "     - Удаление хвостов от предыдущих действий..."
 sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/hass-progress.log
