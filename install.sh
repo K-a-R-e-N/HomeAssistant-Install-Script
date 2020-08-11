@@ -195,7 +195,7 @@ ExecStart=/srv/homeassistant/bin/hass -c "/home/homeassistant/.homeassistant"
 WantedBy=multi-user.target
 _EOF_
 
-echo -en "\n" ; echo "  # # Создание службы для автозапуска HASS Configurator-а"
+echo -en "\n" ; echo "  # # Создание службы для автозапуска HASS Configurator"
 sudo rm -rf /etc/systemd/system/hass-configurator.service
 sudo tee -a /etc/systemd/system/hass-configurator.service > /dev/null <<_EOF_
 [Unit]
@@ -236,7 +236,7 @@ echo -en "\n"
 echo -en "\n"
 echo -en "\n"
 echo "╔═════════════════════════════════════════════════════════════════════════════╗"
-echo "║        Процесс установки Home Assistant и его зависимостей завершена        ║"
+echo "║        Процесс установки Home Assistant и его зависимостей завершен         ║"
 echo "╚═════════════════════════════════════════════════════════════════════════════╝"
 echo -en "\n"
 echo "    ┌────────── Полезная информация для работы с Home Assistant ──────────┐"
