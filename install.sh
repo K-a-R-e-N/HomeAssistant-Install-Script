@@ -127,9 +127,7 @@ echo "║           Первый запуск Home Assistant и его наст�
 echo "║                                                                  ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass -v &>/srv/homeassistant/hass-progress.log &'
-echo "      └─── Это займет некоторое время. Ждем завершения... ───┘"
-echo -en "\n"
-echo "                                 Примерное время ожидания ~ 10 мин┘"
+echo " └─── Это займет некоторое время. Примерное ожидание 10 мин... ───┘"
 echo -en "\n"
 
 sudo rm -rf /srv/homeassistant/search_install.sh
