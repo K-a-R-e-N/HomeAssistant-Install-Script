@@ -102,7 +102,7 @@ sudo chown homeassistant:homeassistant homeassistant
 echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
 
 #Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "     - Создание окружения...\n" && python3 -m venv . && printf "     - Активация окружения...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "     - Создание виртуальной среды...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant'
 
 #Выполнение через sh вариант
 #sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
