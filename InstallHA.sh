@@ -92,7 +92,7 @@ fi
 }
 
 
-
+/home/homeassistant/.homeassistant
 
 
 function BackUpScript() {
@@ -100,7 +100,10 @@ CheckBackUp=0
 if ! [ -d ~/HA_BackUp/ ]; then
 		sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
 fi
-
+	if [ -f /home/homeassistant/.homeassistant/backup/*.tar ]; then
+		CheckBackUp=1
+		sudo cp -f /home/homeassistant/.homeassistant/backup/*.tar ~/HA_BackUp/
+	fi
 	if [ -f ~/home/homeassistant/.homeassistant/configuration.yaml ]; then
 		CheckBackUp=1
 		sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
