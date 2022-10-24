@@ -92,54 +92,29 @@ fi
 }
 
 
-/home/homeassistant/.homeassistant
 
 
 function BackUpScript() {
+
 CheckBackUp=0
-if ! [ -d ~/HA_BackUp/ ]; then
-		sudo mkdir -p ~/HA_BackUp && sudo chmod 777 ~/HA_BackUp
-fi
+BackupsFolder=~/HA_Backup
+[ ! -d "$BackupsFolder" ] && sudo mkdir -p "$BackupsFolder" && sudo chmod 777 "$BackupsFolder"
 
-	if [ -f /home/homeassistant/.homeassistant/configuration.yaml ]; then
-		CheckBackUp=1
-		sudo cp -f /home/homeassistant/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
-	fi
-	if [ -f /usr/share/hassio/homeassistant/configuration.yaml ]; then
-		CheckBackUp=1
-		sudo cp -f /usr/share/hassio/homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
-	fi
-	
-	if [ -f /home/$USER/.homeassistant/configuration.yaml ]; then
-		CheckBackUp=1
-		sudo cp -f /home/$USER/.homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
-	fi
-	
-	if [ -f /home/$USER/homeassistant/configuration.yaml ]; then
-		CheckBackUp=1
-		sudo cp -f /home/$USER/homeassistant/configuration.yaml ~/HA_BackUp/configuration.yaml.$(date +%s)000
-	fi
+	HA_SOURCE=/home/homeassistant/.homeassistant
+	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 
-
-
-	if [ -f /home/homeassistant/.homeassistant/backup/*.tar ]; then
-		CheckBackUp=1
-		sudo cp -f /home/homeassistant/.homeassistant/backup/*.tar ~/HA_BackUp/
-	fi
-	if [ -f /usr/share/hassio/homeassistant/backup/*.tar ]; then
-		CheckBackUp=1
-		sudo cp -f /usr/share/hassio/homeassistant/backup/*.tar ~/HA_BackUp/
-	fi
+	HA_SOURCE=/usr/share/hassio/homeassistant
+	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 	
-	if [ -f /home/$USER/.homeassistant/backup/*.tar ]; then
-		CheckBackUp=1
-		sudo cp -f /home/$USER/.homeassistant/backup/*.tar ~/HA_BackUp/
-	fi
+	HA_SOURCE=/home/$USER/.homeassistant
+	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 	
-	if [ -f /home/$USER/homeassistant/backup/*.tar ]; then
-		CheckBackUp=1
-		sudo cp -f /home/$USER/homeassistant/backup/*.tar ~/HA_BackUp/
-	fi
+	HA_SOURCE=/home/$USER/homeassistant
+	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 
 if [ $CheckBackUp -eq 1 ]; then
 	echo -en "\n" ; echo "  # # Создание резервной копии конфигурационных файлов Home Assistant..."
