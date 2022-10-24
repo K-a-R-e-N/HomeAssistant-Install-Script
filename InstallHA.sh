@@ -199,55 +199,56 @@ fi
 ##################################################################################################################
 ##################################################################################################################
 
-# Очистка перед запуском скрипта
-echo "     - Подготовка к первому запуску..."
+# Очистка перед запуском специального скрипта
 sudo rm -rf /srv/homeassistant/nohup.out
 sudo rm -rf /srv/homeassistant/hass-progress.log
 sudo rm -rf /srv/homeassistant/search_install.sh
 sleep 1
 
-echo -en "\n" ; echo -en "\n"
-echo "╔══════════════════════════════════════════════════════════════════╗"
-echo "║                                                                  ║"
-echo "║           Первый запуск Home Assistant и его настройка           ║"
-echo "║                                                                  ║"
-echo "╚══════════════════════════════════════════════════════════════════╝"
+#echo -en "\n" ; echo "  # # Первый запуск Home Assistant для его настройки..."
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass -v &>/srv/homeassistant/hass-progress.log &'
-echo " └─── Это займет некоторое время. Примерное ожидание 10 мин... ───┘"
-echo -en "\n"
 
-sudo rm -rf /srv/homeassistant/search_install.sh
+# Создание специального скрипта
 sudo tee -a /srv/homeassistant/search_install.sh > /dev/null <<_EOF_
 until grep "Setting up config" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
   done
-echo "     - Настройка конфигурации... нужно больше времени..."
+echo "     - Настройка конфигурации..."
 until grep "Setting up frontend" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
   done
-echo "     - Настройка внешнего интерфейса... все еще ждем..."
+echo "     - Настройка внешнего интерфейса..."
 until grep "Starting Home Assistant" /srv/homeassistant/hass-progress.log > /dev/null
   do
   sleep 10
   done
-echo "     - Завершение процесса настраивания..."
+echo "     - Настройка сети...  нужно больше времени..."
+until grep "Setting up network" /srv/homeassistant/hass-progress.log > /dev/null
+  do
+  sleep 10
+  done
+echo "     - Остальные необходимые настройки успешно завершены..."
 _EOF_
 sleep 1
 
-echo "     - Инициализация программы Home Assistant... подождите..."
+# Запуск специального скрипта
+echo "     - Инициализация Home Assistant..."
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && bash /srv/homeassistant/search_install.sh'
 
-echo "     - Принудительное закрытие Home Assistant..."
+echo "     - Завершение работы Home Assistant..."
 #sudo killall -w -s 9 -u homeassistant
 sudo killall -s 9 -u homeassistant
 
-echo "     - Удаление хвостов от предыдущих действий..."
-sudo rm -rf /srv/homeassistant/nohup.out ; sudo rm -rf /srv/homeassistant/hass-progress.log
+# Очистка после запуска специального скрипта
+sleep 1
+sudo rm -rf /srv/homeassistant/nohup.out
+sudo rm -rf /srv/homeassistant/hass-progress.log
 sudo rm -rf /srv/homeassistant/search_install.sh
 
-#htop ; echo -en "\n" ; echo "  # # Просмотр процессов..."
+#Просмотр процессов
+#htop
 
 echo -en "\n" ; echo "  # # Установка HASS конфигуратора"
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && cd /home/homeassistant/.homeassistant && wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py'
@@ -300,7 +301,16 @@ sudo mv -f ~/HA_BackUp/configuration.yaml.* /home/homeassistant/.homeassistant/H
 sudo rm -rf ~/HA_BackUp
 fi
 
-echo -en "\n" ; echo "  # # Добавление служб в список автозагрузки и их запуск..."
+if [ -f ~/HA_BackUp/configuration.yaml.* ]; then
+echo -en "\n" ; echo "  # # Восстанавление резервной копии конфигурационных файлов Home Assistant..."
+#	if ! [ -d /var/lib/homebridge/backups/config-backups/ ]; then
+#		sudo mkdir -p /var/lib/homebridge/backups/config-backups/ && sudo chmod 777 /var/lib/homebridge/backups/config-backups/
+#	fi
+#	sudo mv -f ~/HA_BackUp/config.json.* /var/lib/homebridge/backups/config-backups/
+#	sudo rm -rf ~/HA_BackUp
+#fi
+
+echo -en "\n" ; echo "  # # Создание автозагрузки и запуск служб..."
 sudo systemctl -q daemon-reload
 # sudo systemctl -q --system daemon-reload
 sudo systemctl -q enable homeassistant@homeassistant.service
@@ -320,14 +330,6 @@ sudo systemctl -q start hass-configurator.service
 ##################################################################################################################
 ##################################################################################################################
 
-#if [ -f ~/HA_BackUp/config.json.* ]; then
-#echo -en "\n" ; echo "  # # Восстанавление резервной копии конфигурационных файлов Home Assistant..."
-#	if ! [ -d /var/lib/homebridge/backups/config-backups/ ]; then
-#		sudo mkdir -p /var/lib/homebridge/backups/config-backups/ && sudo chmod 777 /var/lib/homebridge/backups/config-backups/
-#	fi
-#	sudo mv -f ~/HA_BackUp/config.json.* /var/lib/homebridge/backups/config-backups/
-#	sudo rm -rf ~/HA_BackUp
-#fi
 
 echo -en "\n"
 echo -en "\n"
