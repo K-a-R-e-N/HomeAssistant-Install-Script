@@ -1,7 +1,7 @@
 #!/bin/bash
 red=$(tput setf 4) ; green=$(tput setf 2) ; reset=$(tput sgr0) ; cmdkey=0 ; ME=`basename $0` ; cd~ ; clear
 
-
+BackupsFolder=~/HA_Backup
 
 
 function Zagolovok {
@@ -97,12 +97,7 @@ fi
 function BackUpScript() {
 
 CheckBackUp=0
-BackupsFolder=~/HA_Backup
 [ ! -d "$BackupsFolder" ] && sudo mkdir -p "$BackupsFolder" && sudo chmod 777 "$BackupsFolder"
-
-	HA_SOURCE=/home/homeassistant/.homeassistant
-	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 
 	HA_SOURCE=/usr/share/hassio/homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
@@ -113,6 +108,10 @@ BackupsFolder=~/HA_Backup
 	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 	
 	HA_SOURCE=/home/$USER/homeassistant
+	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
+
+	HA_SOURCE=/home/homeassistant/.homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
 	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
 
@@ -304,21 +303,16 @@ Restart=always
 WantedBy=multi-user.target
 _EOF_
 
-if [ -d ~/HA_BackUp/ ]; then 
-echo -en "\n" ; echo "  # # Восстанавление резервной копии конфигурационного файла Home Assistant..."
-sudo mkdir -p /home/homeassistant/.homeassistant/HA_BackUp && sudo chmod 777 /home/homeassistant/.homeassistant/HA_BackUp
-sudo mv -f ~/HA_BackUp/configuration.yaml.* /home/homeassistant/.homeassistant/HA_BackUp
-sudo rm -rf ~/HA_BackUp
+# Восстанавление резервной копии
+if [ -f "$BackupsFolder/*" ]; then
+	echo -en "\n" && echo "  # # Восстанавление резервной копии Home Assistant в папку backup..."
+	if [ ! -d "/home/homeassistant/.homeassistant/backup" ]; then 
+		sudo mkdir -p "/home/homeassistant/.homeassistant/backup" && sudo chown homeassistant.homeassistant "/home/homeassistant/.homeassistant/backup"
+	fi
+	sudo mv -f "$BackupsFolder/*" "/home/homeassistant/.homeassistant/backup"
+	sudo rm -rf "$BackupsFolder/*"
 fi
 
-if [ -f ~/HA_BackUp/configuration.yaml.* ]; then
-echo -en "\n" ; echo "  # # Восстанавление резервной копии конфигурационных файлов Home Assistant..."
-#	if ! [ -d /var/lib/homebridge/backups/config-backups/ ]; then
-#		sudo mkdir -p /var/lib/homebridge/backups/config-backups/ && sudo chmod 777 /var/lib/homebridge/backups/config-backups/
-#	fi
-#	sudo mv -f ~/HA_BackUp/config.json.* /var/lib/homebridge/backups/config-backups/
-#	sudo rm -rf ~/HA_BackUp
-#fi
 
 echo -en "\n" ; echo "  # # Создание автозагрузки и запуск служб..."
 sudo systemctl -q daemon-reload
