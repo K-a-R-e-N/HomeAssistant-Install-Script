@@ -172,7 +172,7 @@ sudo chown homeassistant:homeassistant /srv/homeassistant
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "\n  # # Создание виртуальной среды для нового аккаунта...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant... ${green}[ Это займет некоторое время ]${reset}\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant  > /dev/null 2>&1'
 if [ $? -eq 0 ]; then
 	if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
-		echo "     ${green}- Home Assistant успешно установлен через PIP...${reset}"
+		echo "     - Успешно ${green}установлен${reset} через PIP..."
 	fi
 else
 	echo "     {red}- Не удалось установить Home Assistant через PIP!!!${reset}"
@@ -195,7 +195,7 @@ sudo rm -rf /srv/homeassistant/hass-progress.log
 sudo rm -rf /srv/homeassistant/search_install.sh
 sleep 1
 
-#echo -en "\n" ; echo "  # # Первый запуск Home Assistant для его настройки..."
+echo -en "\n" ; echo "  # # Первый запуск Home Assistant для его настройки..."
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && nohup hass -v &>/srv/homeassistant/hass-progress.log &'
 
 # Создание специального скрипта
@@ -337,18 +337,18 @@ echo "    │                                                                   
 echo "    │                     Перезагрузка Home Assistant                     │"
 echo "    │     ${green}sudo systemctl restart homeassistant@homeassistant.service${reset}      │"
 echo "    │                                                                     │"
-echo "    │                    Запустит HB - ${green}sudo${reset}              │"
-echo "    │                  Остановить HB - ${green}sudo${reset}               │"
+echo "    │                    Запустит HB - ${green}sudo                  ${reset}              │"
+echo "    │                  Остановить HB - ${green}sudo                 ${reset}               │"
 echo "    │                                                                     │"
 echo "    │                   Перезагрузка HASS конфигуратора                   │"
 echo "    │           ${green}sudo systemctl restart hass-configurator.service${reset}          │"
 
 echo "    │                                                                     │"
-echo "    │              Просмотр журналов - ${green}sudo${reset}               │"
+echo "    │              Просмотр журналов - ${green}sudo                 ${reset}               │"
 echo "    │                                                                     │"
 echo "    │                    Установка и удаление плагинов                    │"
-echo "    │               ${green}sudo -example${reset}                │"
-echo "    │               ${green}sudo -example${reset}             │"
+echo "    │               ${green}sudo -example                        ${reset}                │"
+echo "    │               ${green}sudo -example                           ${reset}             │"
 echo "    │                                                                     │"
 echo "    └─────────────────────────────────────────────────────────────────────┘"
 echo -e "\a"
