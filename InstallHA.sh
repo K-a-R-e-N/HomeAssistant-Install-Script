@@ -97,23 +97,23 @@ fi
 function BackUpScript() {
 
 CheckBackUp=0
-[ ! -d "$BackupsFolder" ] && sudo mkdir -p "$BackupsFolder" && sudo chmod 777 "$BackupsFolder"
+[ ! -d $BackupsFolder ] && sudo mkdir -p $BackupsFolder && sudo chmod 777 $BackupsFolder
 
 	HA_SOURCE=/usr/share/hassio/homeassistant
-	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
+	[ ! -d $HA_SOURCE ] && CheckBackUp=1 && sudo tar cfz $BackupsFolder/$(date +'%Y.%m.%d')-config.tgz -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f $HA_SOURCE/configuration.yaml ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 	
 	HA_SOURCE=/home/$USER/.homeassistant
-	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
+	[ ! -d $HA_SOURCE ] && CheckBackUp=1 && sudo tar cfz $BackupsFolder/$(date +'%Y.%m.%d')-config.tgz -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f $HA_SOURCE/configuration.yaml ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 	
 	HA_SOURCE=/home/$USER/homeassistant
-	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
+	[ ! -d $HA_SOURCE ] && CheckBackUp=1 && sudo tar cfz $BackupsFolder/$(date +'%Y.%m.%d')-config.tgz -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f $HA_SOURCE/configuration.yaml ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1  
 
 	HA_SOURCE=/home/homeassistant/.homeassistant
-	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
+	[ ! -d $HA_SOURCE ] && CheckBackUp=1 && sudo tar cfz $BackupsFolder/$(date +'%Y.%m.%d')-config.tgz -C $HA_SOURCE . > /dev/null 2>&1
+	[ ! -f $HA_SOURCE/configuration.yaml ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1  
 
 if [ $CheckBackUp -eq 1 ]; then
 	echo -en "\n" ; echo "  # # Создание резервной копии конфигурационных файлов Home Assistant..."
@@ -197,16 +197,6 @@ else
 fi
 
 ##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
 
 # Очистка перед запуском специального скрипта
 sudo rm -rf /srv/homeassistant/nohup.out
@@ -259,6 +249,8 @@ sudo rm -rf /srv/homeassistant/search_install.sh
 #Просмотр процессов
 #htop
 
+##################################################################################################################
+
 echo -en "\n" ; echo "  # # Установка HASS конфигуратора"
 sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && python3 -m venv . && source bin/activate && cd /home/homeassistant/.homeassistant && wget -q https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py'
 sudo chmod 755 /home/homeassistant/.homeassistant/configurator.py
@@ -304,13 +296,14 @@ WantedBy=multi-user.target
 _EOF_
 
 # Восстанавление резервной копии
-if [ -f "$BackupsFolder/*" ]; then
+if [ -f $BackupsFolder/* ]; then
 	echo -en "\n" && echo "  # # Восстанавление резервной копии Home Assistant в папку backup..."
-	if [ ! -d "/home/homeassistant/.homeassistant/backup" ]; then 
-		sudo mkdir -p "/home/homeassistant/.homeassistant/backup" && sudo chown homeassistant.homeassistant "/home/homeassistant/.homeassistant/backup"
+
+	if [ ! -d /home/homeassistant/.homeassistant/backup ] ; then 
+		sudo mkdir -p /home/homeassistant/.homeassistant/backup/ && sudo chown homeassistant.homeassistant /home/homeassistant/.homeassistant/backup/
 	fi
-	sudo mv -f "$BackupsFolder/*" "/home/homeassistant/.homeassistant/backup"
-	sudo rm -rf "$BackupsFolder/*"
+	sudo mv -f $BackupsFolder/* /home/homeassistant/.homeassistant/backup/
+	sudo rm -rf $BackupsFolder
 fi
 
 
@@ -321,18 +314,6 @@ sudo systemctl -q enable homeassistant@homeassistant.service
 sudo systemctl -q start homeassistant@homeassistant.service
 sudo systemctl -q enable hass-configurator.service
 sudo systemctl -q start hass-configurator.service
-
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
-##################################################################################################################
 
 
 echo -en "\n"
