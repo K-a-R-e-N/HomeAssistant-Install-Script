@@ -1,5 +1,6 @@
 #!/bin/bash
-red=$(tput setf 4) ; green=$(tput setf 2) ; reset=$(tput sgr0) ; cmdkey=0 ; ME=`basename $0` ; cd~ ; clear
+red=$(tput setf 4) ; green=$(tput setf 2) ; reset=$(tput sgr0) ; cmdkey=0 ; ME=`basename $0` cd~ ; clear
+
 
 BackupsFolder=~/HA_Backup
 
@@ -17,8 +18,8 @@ function GoToMenu {
   GoToMenuInfo="Чтобы продолжить, введите"
 while :
 	do
-	clear
-	Zagolovok 
+	clear ; CheckBackUp=0 ; BackupRecovery=0
+	Zagolovok
 	echo -en "\n"
 	echo "     ┌─ Выберите действие: ──────────────────────────────────────────────┐"
 	echo "     │                                                                   │"
@@ -96,7 +97,6 @@ fi
 
 function BackUpScript() {
 
-CheckBackUp=0
 [ ! -d $BackupsFolder ] && sudo mkdir -p $BackupsFolder && sudo chmod 777 $BackupsFolder
 
 	HA_SOURCE=/usr/share/hassio/homeassistant
@@ -291,7 +291,8 @@ _EOF_
 
 # Восстанавление резервной копии
 if [ -f $BackupsFolder/* ]; then
-	echo -en "\n" && echo "  # # Восстанавление резервной копии Home Assistant в папку backup..."
+
+	BackupRecovery=1 && echo -en "\n" && echo "  # # Восстанавление резервной копии Home Assistant в папку backup..."
 
 	if [ ! -d /home/homeassistant/.homeassistant/backup ] ; then 
 		sudo mkdir -p /home/homeassistant/.homeassistant/backup/ && sudo chown homeassistant.homeassistant /home/homeassistant/.homeassistant/backup/
