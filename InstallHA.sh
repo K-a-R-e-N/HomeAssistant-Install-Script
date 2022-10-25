@@ -101,19 +101,19 @@ CheckBackUp=0
 
 	HA_SOURCE=/usr/share/hassio/homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 	
 	HA_SOURCE=/home/$USER/.homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 	
 	HA_SOURCE=/home/$USER/homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 
 	HA_SOURCE=/home/homeassistant/.homeassistant
 	[ ! -d "$HA_SOURCE" ] && CheckBackUp=1 && sudo tar cfz "$BackupsFolder/$(date +'%Y.%m.%d')-config.tgz" -C $HA_SOURCE . > /dev/null 2>&1
-	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000
+	[ ! -f "$HA_SOURCE/configuration.yaml" ] && CheckBackUp=1 && sudo cp -f $HA_SOURCE/configuration.yaml $BackupsFolder/configuration.yaml.$(date +%s)000 >/dev/null 2>&1 
 
 if [ $CheckBackUp -eq 1 ]; then
 	echo -en "\n" ; echo "  # # Создание резервной копии конфигурационных файлов Home Assistant..."
