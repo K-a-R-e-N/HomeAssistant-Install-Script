@@ -169,7 +169,7 @@ sudo mkdir /srv/homeassistant
 sudo chown homeassistant:homeassistant /srv/homeassistant
 
 #Создание виртуальной среды для нового аккаунта через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "\n  # # Создание виртуальной среды для нового аккаунта...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant  > /dev/null 2>&1'
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "\n  # # Создание виртуальной среды для нового аккаунта...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant... ${green}[ Это займет некоторое время ]${reset}\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant  > /dev/null 2>&1'
 if [ $? -eq 0 ]; then
 	if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
 		echo "     ${green}- Home Assistant успешно установлен через PIP...${reset}"
