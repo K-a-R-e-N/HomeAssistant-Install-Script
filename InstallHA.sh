@@ -1,25 +1,28 @@
 #!/bin/bash
-red=$(tput setf 4) ; green=$(tput setf 2) ; reset=$(tput sgr0) ; cmdkey=0 ; ME=`basename $0` cd~ ; clear
+yellow=$(tput setf 6) ; red=$(tput setf 4) ; green=$(tput setf 2) ; reset=$(tput sgr0)
+cmdkey=0 ; ME=`basename $0` cd~ ; clear
 
 
 BackupsFolder=~/HA_Backup
 
 
 function Zagolovok {
+${yellow}
 echo -en "\n"
 echo "╔═════════════════════════════════════════════════════════════════════════════╗"
 echo "║                                                                             ║"
-echo "║                 Установка Home Assistant и его зависимостей                 ║"
+echo "║                 $ZI Home Assistant и его зависимостей                 ║"
 echo "║                                                                             ║"
 echo "╚═════════════════════════════════════════════════════════════════════════════╝"
 echo -en "\n"
+${reset}
 }
 function GoToMenu {
   GoToMenuInfo="Чтобы продолжить, введите"
 while :
 	do
 	clear ; CheckBackUp=0 ; BackupRecovery=0
-	Zagolovok
+	ZI=Установка && Zagolovok
 	echo -en "\n"
 	echo "     ┌─ Выберите действие: ──────────────────────────────────────────────┐"
 	echo "     │                                                                   │"
@@ -374,13 +377,7 @@ GoToMenu
 
 function UninstallScript() {
 clear
-echo -en "\n"
-echo "╔═════════════════════════════════════════════════════════════════════════════╗"
-echo "║                                                                             ║"
-echo "║    Удаление Home Assistant, а так же всех его плагинов с конфигурациями     ║"
-echo "║                                                                             ║"
-echo "╚═════════════════════════════════════════════════════════════════════════════╝"
-echo -en "\n"
+ZI=Удаление && Zagolovok
 
 echo -en "\n" ; echo "  # # Остановка и завершение процесса Homebridge..."
 ####sudo systemctl stop homeassistant > /dev/null 2>&1
@@ -427,7 +424,7 @@ sudo rm -rf  /run/sudo/ts/homeassistant
 
 echo -en "\n"
 echo "╔═════════════════════════════════════════════════════════════════════════════╗"
-echo "  ${green}Удаление Home Assistant, а так же всех его плагинов с конфигурациями завершено${reset}"
+echo "  ${green}Удаление Home Assistant, а так же всех его плагинов с конфигурациями завершена${yellow}${reset}"
 echo "╚═════════════════════════════════════════════════════════════════════════════╝"
 echo -e "\a"
 
@@ -463,7 +460,7 @@ exit 0
 
 function print_help() {
 	echo -en "\n"
-	echo "  Справка по работе скрипта $ME из командной строки"
+	echo "  ${yellow}Справка по работе скрипта $ME из командной строки${reset}"
 	echo -en "\n"
 	echo "    Использование: $ME [-i] [-u] [-r] [-d] [-h] "
 	echo -en "\n"
