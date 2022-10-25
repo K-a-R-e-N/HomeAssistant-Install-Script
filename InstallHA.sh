@@ -310,8 +310,6 @@ sudo systemctl -q start homeassistant@homeassistant.service
 sudo systemctl -q enable hass-configurator.service
 sudo systemctl -q start hass-configurator.service
 
-
-echo -en "\n"
 echo -en "\n"
 echo -en "\n"
 echo -en "\n"
@@ -332,7 +330,7 @@ echo "    │                      Войти в Homebridge Shell               
 echo "    │                            ${green}sudo hb-shell${reset}                            │"
 echo "    │                                                                     │"
 echo "    │                  Редактирование файла конфигурации                  │"
-echo "    │              ${green}sudo nano /var/lib/homebridge/config.json  ${reset}              │"
+echo "    │     ${green}sudo nano /home/homeassistant/.homeassistant/configurator.py${reset}    │"
 echo "    │                                                                     │"
 echo "    │                     Перезагрузка Home Assistant                     │"
 echo "    │      sudo systemctl restart homeassistant@homeassistant.service     │"
