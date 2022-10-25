@@ -162,29 +162,18 @@ sudo apt-get install tzdata -y > /dev/null
 #echo -en "\n" ; echo "  # # Установка пакета libavahi-compat-libdnssd-dev..."
 #sudo apt-get install -y libavahi-compat-libdnssd-dev > /dev/null
 
-
-
-
-
-echo -en "\n" ; echo "  # # Создание аккаунта под названием homeassistant..."
+echo -en "\n" ; echo "  # # Создание аккаунта homeassistant..."
 sudo useradd -rm homeassistant -G dialout,gpio,i2c > /dev/null
-
-echo -en "\n" ; echo "  # # Создание виртуальной среды для нового аккаунта..."
 sudo mkdir /srv/homeassistant
 sudo chown homeassistant:homeassistant /srv/homeassistant
 
-#echo -en "\n" ; echo "  # # Создание каталога homeassistant с передачей прав новому аккаунту..."
-#Выполнение через Bash вариант
-sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "     - Создание виртуальной среды...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant'
-
-#Выполнение через sh вариант OLD VERSION
-#sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && pip -q install homeassistant && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
-#sudo -u homeassistant -H -s sh -c 'cd /srv/homeassistant && python3 -m venv . && . ./bin/activate && printf "\n  # # Запуск логирования......\n" && nohup hass &>/srv/homeassistant/hass-progress.log &'
+#Создание виртуальной среды для нового аккаунта через Bash вариант
+sudo -u homeassistant -H -s bash -c 'cd /srv/homeassistant && printf "  # # Создание виртуальной среды для нового аккаунта...\n" && python3 -m venv . && printf "     - Активация виртуальной среды...\n" && source bin/activate && printf "     - Установка зависимостей для виртуальной среды...\n" && python3 -m pip -q install wheel && printf "\n  # # Установка Home Assistant...\n" && python3 -m pip -q install --no-cache-dir --default-timeout=100 homeassistant'
 
 if [ -d /srv/homeassistant ] && (cd /srv/homeassistant && source ./bin/activate && pip freeze | grep -q homeassistant); then
-  echo "     {green}- Home Assistant успешно установлен через PIP...${reset}"
+  echo "     ${green}- Home Assistant успешно установлен через PIP...${reset}"
 else
-  echo -en "\n" ; echo "     {red}- Не удалось установить Home Assistant через PIP!!!${reset}"
+  echo "     {red}- Не удалось установить Home Assistant через PIP!!!${reset}"
 	if [ $cmdkey -eq 1 ]; then
 		echo -en "\n" ; echo -e "\a"
 		read -p "${green}           Нажмите любую клавишу, чтобы завершить работу скрипта...${reset}"
