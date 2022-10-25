@@ -7,15 +7,13 @@ BackupsFolder=~/HA_Backup
 
 
 function Zagolovok {
-${yellow}
-echo -en "\n"
+echo -en "${yellow} \n"
 echo "╔═════════════════════════════════════════════════════════════════════════════╗"
 echo "║                                                                             ║"
 echo "║                 $ZI Home Assistant и его зависимостей                 ║"
 echo "║                                                                             ║"
 echo "╚═════════════════════════════════════════════════════════════════════════════╝"
-echo -en "\n"
-${reset}
+echo -en "\n ${reset}"
 }
 function GoToMenu {
   GoToMenuInfo="Чтобы продолжить, введите"
