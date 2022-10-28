@@ -335,8 +335,8 @@ echo "    │                                                                   
 echo "    │                     Перезагрузка Home Assistant                     │"
 echo "    │     ${green}sudo systemctl restart homeassistant@homeassistant.service${reset}      │"
 echo "    │                                                                     │"
-echo "    │                    Запустит HB - ${green}sudo                  ${reset}              │"
-echo "    │                  Остановить HB - ${green}sudo                 ${reset}               │"
+echo "    │                    Запустит HB - ${green}sudo systemctl -q start kodi.service${reset}              │"
+echo "    │                  Остановить HB - ${green}sudo systemctl -q stop kodi.service${reset}               │"
 echo "    │                                                                     │"
 echo "    │                   Перезагрузка HASS конфигуратора                   │"
 echo "    │           ${green}sudo systemctl restart hass-configurator.service${reset}          │"
@@ -372,8 +372,8 @@ clear
 ZI= Удаление && Zagolovok
 
 echo -en "\n" ; echo "  # # Остановка и завершение процесса Homebridge..."
-####sudo systemctl stop homeassistant > /dev/null 2>&1
-####sudo service homeassistant stop > /dev/null 2>&1
+sudo systemctl stop homeassistant > /dev/null 2>&1
+sudo service homeassistant stop > /dev/null 2>&1
 sudo killall -w -s 9 -u homeassistant > /dev/null 2>&1
 
 BackUpScript
@@ -392,20 +392,20 @@ echo -en "\n" ; echo "  # # Удаление пользователя homeassist
 sudo userdel -rf homeassistant > /dev/null 2>&1
 
 echo -en "\n" ; echo "  # # Удаление служб из списока автозагрузки..."
-####sudo update-rc.d homeassistant remove > /dev/null 2>&1
-####sudo rm -rf /etc/init.d/homeassistant*
+sudo update-rc.d homeassistant remove > /dev/null 2>&1
+sudo rm -rf /etc/init.d/homeassistant*
 sudo rm -rf /etc/systemd/system/homeassistant*
 sudo rm -rf /etc/systemd/system/multi-user.target.wants/homeassistant*
 sudo systemctl --system daemon-reload > /dev/null
 
 echo -en "\n" ; echo "  # # Удаление хвостов, для возможности последующей нормальной установки..."
-####sudo rm -rf /usr/lib/node_modules/homeassistant*
-####sudo rm -rf /usr/bin/homeassistant*
-####sudo rm -rf /etc/default/homeassistant*
-####sudo rm -rf /var/lib/homeassistant*
-####sudo rm -rf /home/pi/.homeassistant*
-####sudo rm -rf /home/homeassistant*
-####sudo rm -rf ~/.homeassistant*
+sudo rm -rf /usr/lib/node_modules/homeassistant*
+sudo rm -rf /usr/bin/homeassistant*
+sudo rm -rf /etc/default/homeassistant*
+sudo rm -rf /var/lib/homeassistant*
+sudo rm -rf /home/pi/.homeassistant*
+sudo rm -rf /home/homeassistant*
+sudo rm -rf ~/.homeassistant*
 sudo rm -rf /home/homeassistant
 sudo rm -rf /srv/homeassistant
 sudo rm -rf  /run/sudo/ts/homeassistant
