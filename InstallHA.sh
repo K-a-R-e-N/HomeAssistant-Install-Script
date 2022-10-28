@@ -125,7 +125,7 @@ fi
 
 
 function InstallScript() {
-clear
+clear ; CheckBackUp=0 ; BackupRecovery=0
 ZI="Установка" && Zagolovok
 СheckingInstalledPackage
 BackUpScript
@@ -368,7 +368,7 @@ GoToMenu
 
 
 function UninstallScript() {
-clear
+clear ; CheckBackUp=0 ; BackupRecovery=0
 ZI=" Удаление" && Zagolovok
 
 echo -en "\n" ; echo "  # # Остановка и завершение процесса Homebridge..."
