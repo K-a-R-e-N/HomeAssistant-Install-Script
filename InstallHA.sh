@@ -436,7 +436,7 @@ GoToMenu
 
 
 function RremovalItself() {
-clear ; echo -en "\n" ; echo "                   Самоудаление папки со скриптом установки...  " ; cd
+echo -en "\n" ; echo "                   Самоудаление папки со скриптом установки...  " ; cd
 sudo rm -rf ~/HomeAssistant-Install-Script
 if [ $? -eq 0 ]; then
 	echo "                ${green}[Успешно удалено]${reset} - ${red}Завершение работы скрипта...${reset}" ; echo -en "\n"
